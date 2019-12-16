@@ -1,0 +1,60 @@
+version: "3.2"
+services:
+  hz-mc:
+    image: hazelcast/management-center:latest
+    volumes:
+      - /coherence-archive:/tmp/coherence-archive
+    ports:
+      - "8080:8080"
+    networks:
+      - hz-net
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+  hz-senior-1:
+    image: telus/hazelcast:1.0
+    volumes:
+      - /coherence-archive:/tmp/coherence-archive
+    ports:
+      - "5701:5701"
+    networks:
+      - hz-net
+    deploy:
+      placement:
+        constraints:
+          - node.role == worker
+    environment:
+      MANCENTER_URL: "http://34.95.24.60:8080/hazelcast-mancenter"
+  hz-senior-2:
+    image: telus/hazelcast:1.0
+    volumes:
+      - /coherence-archive:/tmp/coherence-archive
+    ports:
+      - "5702:5701"
+    networks:
+      - hz-net
+    deploy:
+      placement:
+        constraints:
+          - node.role == worker
+    environment:
+      MANCENTER_URL: "http://34.95.24.60:8080/hazelcast-mancenter"
+  hz-storage:
+    image: telus/hazelcast:1.0
+    depends_on:
+      - hz-senior-1
+      - hz-senior-2
+    volumes:
+      - /coherence-archive:/tmp/coherence-archive
+    networks:
+      - hz-net
+    deploy:
+      placement:
+        constraints:
+          - node.role == worker
+    environment:
+      MANCENTER_URL: "http://34.95.24.60:8080/hazelcast-mancenter"
+networks:
+  hz-net:
+    external: true
