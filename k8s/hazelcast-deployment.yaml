@@ -9,7 +9,7 @@ metadata:
     io.kompose.service: hazelcast
   name: hazelcast
 spec:
-  replicas: 1
+  replicas: 3
   strategy:
     type: Recreate
   template:
@@ -19,15 +19,19 @@ spec:
         io.kompose.service: hazelcast
     spec:
       containers:
+      - env:
         image: gcr.io/superb-reporter-256719/hazelcast:latest
         name: hazelcast
         resources: {}
+        ports:
+        - containerPort: 5071
+          name: "hazelcast"
         volumeMounts:
-        - mountPath: /tmp/coherence-archive
-          name: coherence-share-claim
+        - mountPath: /tmp/hazelcast-archive
+          name: hazelcast-share-claim
       restartPolicy: Always
       volumes:
-      - name: coherence-share-claim
+      - name: hazelcast-share-claim
         persistentVolumeClaim:
-          claimName: coherence-share-claim
+          claimName: hazelcast-share-claim
 status: {}

@@ -8,9 +8,9 @@ metadata:
     io.kompose.service: hazelcast
   name: hazelcast
 spec:
-  clusterIP: None
+  type: LoadBalancer
   ports:
-  - name: hazelcast
+  - name: "hazelcast"
     port: 5701
   selector:
     io.kompose.service: hazelcast
