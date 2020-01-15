@@ -31,7 +31,7 @@
            xsi:schemaLocation="http://www.hazelcast.com/schema/config
            http://www.hazelcast.com/schema/config/hazelcast-config-3.12.xsd">
 
-    <license-key>ENTERPRISE_HD#6Nodes#K2n1WqXk5DlwgbZyPU8AuYdiNTOJ69mMG0jEfBHCQS11010001010000000119200006901011011910001000</license-key>
+    <!--<license-key>ENTERPRISE_HD#6Nodes#K2n1WqXk5DlwgbZyPU8AuYdiNTOJ69mMG0jEfBHCQS11010001010000000119200006901011011910001000</license-key>-->
     <group>
         <name>dev</name>
     </group>

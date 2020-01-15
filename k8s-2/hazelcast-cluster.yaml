@@ -9,12 +9,29 @@ data:
                    xmlns="http://www.hazelcast.com/schema/config"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
       <management-center enabled="true">http://management-center-internal:8080/hazelcast-mancenter</management-center>
+      <properties>
+            <property name="hazelcast.logging.type">log4j</property>
+            <property name="log4j.configuration">log4j.properties</property>
+      </properties>
       <network>
         <join>
           <multicast enabled="false"/>
           <kubernetes enabled="true" />
         </join>
       </network>
+      <map name="Address">
+      </map>
+      <map name="AddressLink">
+      </map>
+      <map name="Customer">
+      </map>
+      <map name="Order">
+      </map>
+      <map name="OrderItem">
+          <indexes>
+             <index ordered="false">orderId</index>
+          </indexes>
+      </map>
     </hazelcast>
 
 ---
