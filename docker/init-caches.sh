@@ -1,3 +1,3 @@
-/bin/bash
+#/bin/bash
 
-java -cp $CLASSPATH:. com.telus.poc.hazelcast.init.InitCaches
+java -cp $CLASSPATH:./lib/*:. com.telus.poc.hazelcast.init.InitCaches
