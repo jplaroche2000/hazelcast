@@ -10,5 +10,8 @@ spec:
         app: management-center
     spec:
       containers:
-      - name: hazelcast
+      - env:
+        - name: MC_HTTP_PORT
+          value: "8989"
+        name: management-center
         image: hazelcast/management-center
