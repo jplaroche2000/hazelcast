@@ -35,12 +35,12 @@
     <group>
         <name>dev</name>
     </group>
-    <management-center enabled="true">http://34.95.44.247:8080/hazelcast-mancenter</management-center>
-    <properties>
+   <management-center enabled="true">http://management-center-internal:8989/hazelcast-mancenter</management-center>
+   <properties>
             <property name="hazelcast.logging.type">log4j</property>
             <property name="log4j.configuration">log4j.properties</property>
     </properties>
-    
+    <!--
     <hot-restart-persistence enabled="true">
             <backup-dir>/tmp/coherence-archive/hot-backup</backup-dir>
             <base-dir>/tmp/coherence-archive/hot-restart</base-dir>
@@ -48,7 +48,7 @@
             <cluster-data-recovery-policy>FULL_RECOVERY_ONLY</cluster-data-recovery-policy>
             <auto-remove-stale-data>true</auto-remove-stale-data>
     </hot-restart-persistence>
- 
+    --> 
     <network>
         <port auto-increment="true" port-count="100">5701</port>
         <outbound-ports>
@@ -59,49 +59,8 @@
             <ports>0</ports>
         </outbound-ports>
         <join>
-            <multicast enabled="false">
-                <multicast-group>224.2.2.3</multicast-group>
-                <multicast-port>54327</multicast-port>
-            </multicast>
-            <tcp-ip enabled="false">
-                <interface>34.95.44.247</interface>
-                <member-list>
-                    <member>34.95.44.247</member>
-                </member-list>
-            </tcp-ip>
-            <aws enabled="false">
-                <access-key>my-access-key</access-key>
-                <secret-key>my-secret-key</secret-key>
-                <!--optional, default is us-east-1 -->
-                <region>us-west-1</region>
-                <!--optional, default is ec2.amazonaws.com. If set, region shouldn't be set as it will override this property -->
-                <host-header>ec2.amazonaws.com</host-header>
-                <!-- optional, only instances belonging to this group will be discovered, default will try all running instances -->
-                <security-group-name>hazelcast-sg</security-group-name>
-                <tag-key>type</tag-key>
-                <tag-value>hz-nodes</tag-value>
-            </aws>
-            <gcp enabled="false">
-                <zones>us-east1-b,us-east1-c</zones>
-            </gcp>
-            <azure enabled="false">
-                <client-id>CLIENT_ID</client-id>
-                <client-secret>CLIENT_SECRET</client-secret>
-                <tenant-id>TENANT_ID</tenant-id>
-                <subscription-id>SUB_ID</subscription-id>
-                <cluster-id>HZLCAST001</cluster-id>
-                <group-name>GROUP-NAME</group-name>
-            </azure>
-            <kubernetes enabled="true">
-                <namespace>default</namespace>
-                <service-name>hazelcast</service-name>
-            </kubernetes>
-            <eureka enabled="false">
-                <self-registration>true</self-registration>
-                <namespace>hazelcast</namespace>
-            </eureka>
-            <discovery-strategies>
-            </discovery-strategies>
+            <multicast enabled="false"/>
+            <kubernetes enabled="true"/>
         </join>
         <interfaces enabled="false">
             <interface>10.10.1.*</interface>
@@ -171,15 +130,19 @@
     <!-- custom maps -->
     
     <map name="Address">
+	<!--
 	<hot-restart enabled="true">
 		<fsync>false</fsync>
-	</hot-restart>
+	</hot-restart>    
+	-->
     </map>
     
     <map name="AddressLink">
+	<!--
 	<hot-restart enabled="true">
 		<fsync>false</fsync>
-	</hot-restart>
+	</hot-restart>    
+	-->
     </map>
     
     <map name="Customer">
@@ -189,18 +152,22 @@
     </map> 
     
     <map name="Order">
+	<!--
 	<hot-restart enabled="true">
 		<fsync>false</fsync>
-	</hot-restart>       
+	</hot-restart>    
+	-->    
     </map>    
     
     <map name="OrderItem">
 	<indexes>
 		<index ordered="false">orderId</index>
 	</indexes>
+	<!--
 	<hot-restart enabled="true">
 		<fsync>false</fsync>
 	</hot-restart>    
+	-->
     </map>           
     
     <map name="default">
